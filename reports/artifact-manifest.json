@@ -1,0 +1,123 @@
+{
+  "version": "0.1.0",
+  "profiles": [
+    "support",
+    "commands",
+    "spam"
+  ],
+  "primary_neural_seed": 42,
+  "files": {
+    "LICENSE": {
+      "bytes": 1066,
+      "sha256": "75b0a0ae53cabe5d049a645c97c949011a34f1e5e74ebac72b0232ccafe8e67b"
+    },
+    "THIRD_PARTY.md": {
+      "bytes": 2759,
+      "sha256": "99f158b9e2fadce4b414c67aa5036520f29b07fb682543d9b57cdbeba114adae"
+    },
+    "artifacts/commands/evaluation.jsonl": {
+      "bytes": 1219663,
+      "sha256": "149340d3a7790184d8ee1654032a2ed46085b87eb432e8aab4833dbc9346d7aa"
+    },
+    "artifacts/commands/metadata.json": {
+      "bytes": 188961,
+      "sha256": "8874020908955119a6e182222dcd4606e91ebe00963f724176d8b53e3db1b31e"
+    },
+    "artifacts/commands/model.joblib": {
+      "bytes": 33472638,
+      "sha256": "83a92c417965a20274862cd33e1737ee315c319a60c606b24647cc938f53f9a8"
+    },
+    "artifacts/commands/report.json": {
+      "bytes": 271201,
+      "sha256": "401b24619fe9d640627a1d860f13c21d7b34542f1556a5db5d9798a63916cc01"
+    },
+    "artifacts/spam/evaluation.jsonl": {
+      "bytes": 129198,
+      "sha256": "5a05cbe608bb55f3c5b3870e1b11d9d61543d0e90bff86aa50da5aeaccf6c4da"
+    },
+    "artifacts/spam/metadata.json": {
+      "bytes": 16237,
+      "sha256": "ca0061eb61b2944816b6b018bd46582000da2e7782ff96b0ed7d79c51e7913cc"
+    },
+    "artifacts/spam/model.joblib": {
+      "bytes": 932790,
+      "sha256": "b439b63d2039ceb1322b8cca89aee808e116b8391bb2f9eee61b0f98edfc86d7"
+    },
+    "artifacts/spam/report.json": {
+      "bytes": 22684,
+      "sha256": "7f44e61b768e367dcedffe4ed8f5197971c77ee6048bb59209076134a3b6db1a"
+    },
+    "artifacts/support/alignment.json": {
+      "bytes": 648,
+      "sha256": "64f00d6de4fdc208a2a6f994de20aa6e2f62e1c02874af959a2c9c56696b610e"
+    },
+    "artifacts/support/baseline.joblib": {
+      "bytes": 4498613,
+      "sha256": "e414c0f08ad12d4ca4d9fce4a9b6bde0ed15350025c682e81f6f0c672216b7b7"
+    },
+    "artifacts/support/calibration.json": {
+      "bytes": 403,
+      "sha256": "fffa356db2b8160208e574aae7ecb670723abd769900ee1ec716746367bfa1c9"
+    },
+    "artifacts/support/config.json": {
+      "bytes": 365,
+      "sha256": "2f9d4014a59b66736d4aa768fb0383e13b0b5652e4da7754bb5f3e497bd6f225"
+    },
+    "artifacts/support/data_manifest.json": {
+      "bytes": 763761,
+      "sha256": "df55c80b696dbd2567f1feea3bc6c79ef40b9419942686a5f847924a64124699"
+    },
+    "artifacts/support/encoder/config.json": {
+      "bytes": 611,
+      "sha256": "4599e8a5d74ed192b70919aa02124c2d68580070b22e89db956c0353618bccd9"
+    },
+    "artifacts/support/errors.json": {
+      "bytes": 115762,
+      "sha256": "ae87dc3da9aa20b2f6947b178c3ef678a9ed329f36b4264a0966de2ff824ef07"
+    },
+    "artifacts/support/evaluation.json": {
+      "bytes": 130674,
+      "sha256": "bf126dab89211a3fe4f37bff428a59f0e7b9c1e037cce21769d964ccfd28ecb7"
+    },
+    "artifacts/support/history.json": {
+      "bytes": 3602,
+      "sha256": "48a19385f0a3ae529ac9f5b5a622e19197f6a20126911250b0422cf8fdefebd5"
+    },
+    "artifacts/support/labels.json": {
+      "bytes": 1390,
+      "sha256": "8270594d3c815155d32620206ca9875d5d21899b73cc3b5a69dbeb6e15474753"
+    },
+    "artifacts/support/metadata.json": {
+      "bytes": 703,
+      "sha256": "1a6e0ca8edb6a478370f9b2631f87c61f3f40f2aedbbffd91603381d79840c20"
+    },
+    "artifacts/support/model.safetensors": {
+      "bytes": 91303356,
+      "sha256": "65009b54055df7c5181871ba3e31c5427d135c6c71e77a92969eab0dce1271ee"
+    },
+    "artifacts/support/ontology.json": {
+      "bytes": 12520,
+      "sha256": "349ed8725df0524e60c9ce3109a66faf2c0903c96e87b65150846fd5df39691d"
+    },
+    "artifacts/support/tokenizer/special_tokens_map.json": {
+      "bytes": 695,
+      "sha256": "5d5b662e421ea9fac075174bb0688ee0d9431699900b90662acd44b2a350503a"
+    },
+    "artifacts/support/tokenizer/tokenizer.json": {
+      "bytes": 711661,
+      "sha256": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0"
+    },
+    "artifacts/support/tokenizer/tokenizer_config.json": {
+      "bytes": 1464,
+      "sha256": "ccb4eb21a03e1442ee5c3f85431b9c307960a04579942537d74778dc8080a48c"
+    },
+    "artifacts/support/tokenizer/vocab.txt": {
+      "bytes": 231508,
+      "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "licenses/Apache-2.0.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  }
+}

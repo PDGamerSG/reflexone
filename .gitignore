@@ -10,3 +10,4 @@ artifacts/
 dist/
 .env
 *.log
+runs/

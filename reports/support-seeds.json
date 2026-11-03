@@ -1,0 +1,45 @@
+{
+  "primary_seed": 42,
+  "scope": "same fixed grouped data; initialization/order variability, not independent test sets or a confidence interval",
+  "runs": [
+    {
+      "seed": 42,
+      "best_epoch": 14,
+      "micro_f1": 0.8686192468619247,
+      "macro_f1": 0.851693322176147,
+      "slot_f1": 0.6144814090019569,
+      "frame_accuracy": 0.46688741721854304,
+      "training_seconds": 65.5047400839976
+    },
+    {
+      "seed": 7,
+      "best_epoch": 13,
+      "micro_f1": 0.8488471391972673,
+      "macro_f1": 0.8431847371282065,
+      "slot_f1": 0.5957446808510638,
+      "frame_accuracy": 0.423841059602649,
+      "training_seconds": 70.54042254100204
+    },
+    {
+      "seed": 123,
+      "best_epoch": 14,
+      "micro_f1": 0.8604459124690339,
+      "macro_f1": 0.8420039683721238,
+      "slot_f1": 0.6351084812623274,
+      "frame_accuracy": 0.4768211920529801,
+      "training_seconds": 155.4473035420233
+    }
+  ],
+  "mean": {
+    "micro_f1": 0.8593040995094087,
+    "macro_f1": 0.8456273425588258,
+    "slot_f1": 0.615111523705116,
+    "frame_accuracy": 0.45584988962472406
+  },
+  "sample_std": {
+    "micro_f1": 0.009935384391244124,
+    "macro_f1": 0.005286363140397463,
+    "slot_f1": 0.019689463657215318,
+    "frame_accuracy": 0.02816192234475292
+  }
+}

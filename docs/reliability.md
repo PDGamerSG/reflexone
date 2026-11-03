@@ -101,6 +101,11 @@ than `target_risk` and whose accepted count is at least `min_accepted`. Every ti
 score is accepted or reviewed together. The scan permits nonmonotone error curves;
 it does not stop at the first failed cutoff.
 
+The support training wrapper `fit_support_review` restricts that fit to requests
+with a nonempty predicted intent set. The deployed predictor additionally reviews
+empty predictions and any truncated input. Final `review` metrics apply the whole
+deployed rule; the generic `selective_curve` remains a margin-only diagnostic.
+
 The rule accepts when `score >= cutoff` and reviews when `score < cutoff`. If no
 cutoff qualifies, the function returns `1.0`, which reviews every row because valid
 scores are strictly below 1 for the supported decision thresholds. A fitted cutoff

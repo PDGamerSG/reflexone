@@ -1,0 +1,591 @@
+[
+  {
+    "profile": "support",
+    "model_id": "reflexone-support-seed42",
+    "domain": "banking",
+    "text": "My card was stolen last night. Please block it.",
+    "intents": {
+      "account": {
+        "value": false,
+        "probability": 0.0010768167934189507
+      },
+      "acknowledge": {
+        "value": false,
+        "probability": 4.498229640283332e-06
+      },
+      "affirm": {
+        "value": false,
+        "probability": 1.4756781954863982e-05
+      },
+      "appointment": {
+        "value": false,
+        "probability": 0.00013526910567285646
+      },
+      "arrival": {
+        "value": false,
+        "probability": 0.002372095597980585
+      },
+      "balance": {
+        "value": false,
+        "probability": 6.437972532796315e-05
+      },
+      "business": {
+        "value": false,
+        "probability": 1.299012696967218e-05
+      },
+      "cancel_close_leave_freeze": {
+        "value": true,
+        "probability": 0.8741927086059326
+      },
+      "card": {
+        "value": true,
+        "probability": 0.9997031307706217
+      },
+      "change": {
+        "value": false,
+        "probability": 0.00042897243199355807
+      },
+      "cheque": {
+        "value": false,
+        "probability": 0.0004607282477848194
+      },
+      "contactless": {
+        "value": false,
+        "probability": 0.0010798106997544146
+      },
+      "credit": {
+        "value": false,
+        "probability": 0.071171306444385
+      },
+      "current": {
+        "value": false,
+        "probability": 0.00019085150135436302
+      },
+      "debit": {
+        "value": false,
+        "probability": 0.01104214242632169
+      },
+      "deny": {
+        "value": false,
+        "probability": 0.0010383109211166204
+      },
+      "direct_debit": {
+        "value": false,
+        "probability": 1.7543015952744745e-05
+      },
+      "dont_know": {
+        "value": false,
+        "probability": 0.004111698235477592
+      },
+      "end_call": {
+        "value": false,
+        "probability": 3.994564995733838e-07
+      },
+      "existing": {
+        "value": false,
+        "probability": 3.367089998621859e-05
+      },
+      "fees_interests": {
+        "value": false,
+        "probability": 1.0031782564920744e-05
+      },
+      "greet": {
+        "value": false,
+        "probability": 0.0031635834098387833
+      },
+      "handoff": {
+        "value": false,
+        "probability": 0.0005214192409794744
+      },
+      "how": {
+        "value": true,
+        "probability": 0.7308563737750481
+      },
+      "how_long": {
+        "value": false,
+        "probability": 0.00036294510270146733
+      },
+      "how_much": {
+        "value": false,
+        "probability": 3.9753547597275505e-05
+      },
+      "international": {
+        "value": false,
+        "probability": 0.017467350443816053
+      },
+      "less_lower_before": {
+        "value": false,
+        "probability": 1.641048968041223e-05
+      },
+      "limits": {
+        "value": false,
+        "probability": 5.28663926403731e-05
+      },
+      "loan": {
+        "value": false,
+        "probability": 1.9480278971447078e-05
+      },
+      "lost_stolen": {
+        "value": true,
+        "probability": 0.9957243462531511
+      },
+      "make_open_apply_setup_get_activate": {
+        "value": false,
+        "probability": 0.010728674136126064
+      },
+      "more_higher_after": {
+        "value": false,
+        "probability": 2.6012333032498146e-06
+      },
+      "mortgage": {
+        "value": false,
+        "probability": 3.624128055594955e-05
+      },
+      "new": {
+        "value": false,
+        "probability": 5.3703773033995036e-05
+      },
+      "overdraft": {
+        "value": false,
+        "probability": 0.00033316719678536273
+      },
+      "pin": {
+        "value": false,
+        "probability": 0.1362139639522123
+      },
+      "refund": {
+        "value": false,
+        "probability": 0.01830200714278575
+      },
+      "repeat": {
+        "value": false,
+        "probability": 0.00015345605274015746
+      },
+      "request_info": {
+        "value": false,
+        "probability": 0.011514990054919664
+      },
+      "savings": {
+        "value": false,
+        "probability": 0.0007651861042734701
+      },
+      "standing_order": {
+        "value": false,
+        "probability": 0.0004378085307062212
+      },
+      "thank": {
+        "value": false,
+        "probability": 0.0006735200248580896
+      },
+      "transfer_payment_deposit": {
+        "value": false,
+        "probability": 0.013100052719853672
+      },
+      "when": {
+        "value": false,
+        "probability": 4.012436343753444e-05
+      },
+      "why": {
+        "value": false,
+        "probability": 0.0001273013288095166
+      },
+      "withdrawal": {
+        "value": false,
+        "probability": 0.16418598094098608
+      },
+      "wrong_notworking_notshowing": {
+        "value": false,
+        "probability": 0.0214878771916182
+      }
+    },
+    "slots": [
+      {
+        "label": "date",
+        "start": 19,
+        "end": 29,
+        "text": "last night",
+        "token_score": 0.7334703803062439
+      }
+    ],
+    "review_required": true,
+    "review_reasons": [
+      "low_intent_margin"
+    ],
+    "truncated": false
+  },
+  {
+    "profile": "support",
+    "model_id": "reflexone-support-seed42",
+    "domain": "hotels",
+    "text": "Can I book two rooms for three adults next Friday?",
+    "intents": {
+      "accesibility": {
+        "value": false,
+        "probability": 0.007902809773463226
+      },
+      "acknowledge": {
+        "value": false,
+        "probability": 3.1894250337498605e-05
+      },
+      "affirm": {
+        "value": false,
+        "probability": 1.8105692229909445e-05
+      },
+      "booking": {
+        "value": true,
+        "probability": 0.9976005674175004
+      },
+      "cancel_close_leave_freeze": {
+        "value": false,
+        "probability": 8.452224206655922e-05
+      },
+      "change": {
+        "value": false,
+        "probability": 4.2452087258701505e-05
+      },
+      "check_in": {
+        "value": false,
+        "probability": 0.0001860686147516922
+      },
+      "check_out": {
+        "value": false,
+        "probability": 0.00043240368347029646
+      },
+      "deny": {
+        "value": false,
+        "probability": 0.00026313959276621146
+      },
+      "dont_know": {
+        "value": false,
+        "probability": 2.071046753264523e-07
+      },
+      "end_call": {
+        "value": false,
+        "probability": 1.0469589177278446e-07
+      },
+      "existing": {
+        "value": false,
+        "probability": 0.003978943047279863
+      },
+      "greet": {
+        "value": false,
+        "probability": 5.2040983717639195e-06
+      },
+      "gym": {
+        "value": false,
+        "probability": 7.05209040685261e-05
+      },
+      "handoff": {
+        "value": false,
+        "probability": 2.061538099285786e-06
+      },
+      "housekeeping": {
+        "value": false,
+        "probability": 1.2245309419635364e-05
+      },
+      "how": {
+        "value": false,
+        "probability": 0.0001402952917298203
+      },
+      "how_long": {
+        "value": false,
+        "probability": 4.039638939456543e-07
+      },
+      "how_much": {
+        "value": false,
+        "probability": 2.6684341344934788e-05
+      },
+      "less_lower_before": {
+        "value": false,
+        "probability": 0.00028241256854039787
+      },
+      "limits": {
+        "value": false,
+        "probability": 1.546669323658184e-05
+      },
+      "lost_stolen": {
+        "value": false,
+        "probability": 1.6663743313546147e-07
+      },
+      "make_open_apply_setup_get_activate": {
+        "value": true,
+        "probability": 0.9893859042019659
+      },
+      "more_higher_after": {
+        "value": false,
+        "probability": 0.0007236793444380808
+      },
+      "new": {
+        "value": false,
+        "probability": 0.000248955371456977
+      },
+      "parking": {
+        "value": false,
+        "probability": 0.0004106711550034892
+      },
+      "pets": {
+        "value": false,
+        "probability": 2.6476322339688523e-05
+      },
+      "refund": {
+        "value": false,
+        "probability": 1.0662082873743708e-05
+      },
+      "repeat": {
+        "value": false,
+        "probability": 7.692374744662676e-09
+      },
+      "request_info": {
+        "value": false,
+        "probability": 0.09668017498933874
+      },
+      "restaurant": {
+        "value": false,
+        "probability": 0.0034689306930021924
+      },
+      "room_ammenities": {
+        "value": false,
+        "probability": 0.015905908341703887
+      },
+      "room_service": {
+        "value": false,
+        "probability": 0.003759381454920532
+      },
+      "spa": {
+        "value": false,
+        "probability": 0.0008001597249487646
+      },
+      "swimming_pool": {
+        "value": false,
+        "probability": 4.4350408800731846e-05
+      },
+      "thank": {
+        "value": false,
+        "probability": 4.6025268741194734e-07
+      },
+      "when": {
+        "value": false,
+        "probability": 5.945179242605174e-05
+      },
+      "why": {
+        "value": false,
+        "probability": 1.9746435604888698e-05
+      },
+      "wifi": {
+        "value": false,
+        "probability": 2.307378937961408e-07
+      },
+      "wrong_notworking_notshowing": {
+        "value": false,
+        "probability": 9.595262751092675e-07
+      }
+    },
+    "slots": [
+      {
+        "label": "rooms",
+        "start": 11,
+        "end": 20,
+        "text": "two rooms",
+        "token_score": 0.6894857883453369
+      },
+      {
+        "label": "adults",
+        "start": 25,
+        "end": 30,
+        "text": "three",
+        "token_score": 0.8903576731681824
+      },
+      {
+        "label": "date",
+        "start": 38,
+        "end": 49,
+        "text": "next Friday",
+        "token_score": 0.6510848999023438
+      },
+      {
+        "label": "date_from",
+        "start": 38,
+        "end": 49,
+        "text": "next Friday",
+        "token_score": 0.7584851384162903
+      }
+    ],
+    "review_required": false,
+    "review_reasons": [],
+    "truncated": false
+  },
+  {
+    "task": "commands",
+    "label": "play_music",
+    "candidate_label": "play_music",
+    "probabilities": {
+      "accept_reservations": 1.1328127608321031e-10,
+      "account_blocked": 4.659332347315367e-11,
+      "alarm": 1.757727763063794e-10,
+      "application_status": 4.7766582805151634e-11,
+      "apr": 2.92830397548543e-11,
+      "are_you_a_bot": 6.014333332954714e-11,
+      "balance": 5.56178095887453e-11,
+      "bill_balance": 1.1194409733659532e-10,
+      "bill_due": 3.01913988259561e-11,
+      "book_flight": 9.695104158401241e-11,
+      "book_hotel": 1.255330934876515e-10,
+      "calculator": 4.348095597453214e-10,
+      "calendar": 5.274946741006943e-11,
+      "calendar_update": 2.2885179254982596e-10,
+      "calories": 8.837504731858811e-11,
+      "cancel": 2.8024522454651348e-09,
+      "cancel_reservation": 2.0613170782822258e-10,
+      "car_rental": 1.5571813182676973e-10,
+      "card_declined": 5.05363583038152e-11,
+      "carry_on": 4.457225091499053e-11,
+      "change_accent": 9.673026776884134e-11,
+      "change_ai_name": 2.0043737449818798e-10,
+      "change_language": 2.039076078868479e-10,
+      "change_speed": 1.0098206771560443e-09,
+      "change_user_name": 3.572297182928931e-10,
+      "change_volume": 3.7853226120774286e-10,
+      "confirm_reservation": 7.044224103105523e-11,
+      "cook_time": 6.801507538626333e-11,
+      "credit_limit": 1.7002677875383684e-11,
+      "credit_limit_change": 8.018423810886908e-11,
+      "credit_score": 2.2765472688633272e-11,
+      "current_location": 9.343211611265793e-11,
+      "damaged_card": 9.425679052695697e-11,
+      "date": 7.05655497881907e-11,
+      "definition": 1.9458640208966778e-10,
+      "direct_deposit": 3.997871267904178e-11,
+      "directions": 1.1117792529887316e-10,
+      "distance": 7.166711239014623e-11,
+      "do_you_have_pets": 5.949103802409608e-11,
+      "exchange_rate": 1.067986873969555e-10,
+      "expiration_date": 5.5737485619221663e-11,
+      "find_phone": 4.408298545516541e-11,
+      "flight_status": 7.023892882280631e-11,
+      "flip_coin": 1.0131486818233477e-10,
+      "food_last": 9.256920636113127e-11,
+      "freeze_account": 1.7103666822739862e-10,
+      "fun_fact": 1.2269354468201315e-10,
+      "gas": 5.111382804689248e-11,
+      "gas_type": 4.255208985257103e-11,
+      "goodbye": 4.1351635993033165e-10,
+      "greeting": 3.616559554209772e-10,
+      "how_busy": 1.0802508441658763e-10,
+      "how_old_are_you": 8.791185411557233e-11,
+      "improve_credit_score": 5.745388224982173e-11,
+      "income": 8.710856758599199e-11,
+      "ingredient_substitution": 1.7797546558172627e-10,
+      "ingredients_list": 9.312824804215517e-11,
+      "insurance": 7.900493836878238e-11,
+      "insurance_change": 4.3971407110422475e-11,
+      "interest_rate": 3.8837383032772256e-11,
+      "international_fees": 4.051314415433924e-11,
+      "international_visa": 5.326469091026208e-11,
+      "jump_start": 4.900637738783037e-11,
+      "last_maintenance": 4.5371998663167186e-11,
+      "lost_luggage": 6.442727610741923e-11,
+      "make_call": 4.667342732393225e-10,
+      "maybe": 4.2891028676384463e-10,
+      "meal_suggestion": 1.632738525633438e-10,
+      "meaning_of_life": 6.744842188007822e-11,
+      "measurement_conversion": 1.5159495287569057e-10,
+      "meeting_schedule": 1.1558819062578645e-10,
+      "min_payment": 3.6547724986710475e-11,
+      "mpg": 6.068817287412248e-11,
+      "new_card": 7.472305051033688e-11,
+      "next_holiday": 7.214886485045435e-11,
+      "next_song": 1.8382553950023797e-09,
+      "no": 2.5495705950090104e-10,
+      "nutrition_info": 1.2764350231724998e-10,
+      "oil_change_how": 2.6721423376955818e-11,
+      "oil_change_when": 2.7251697326726985e-11,
+      "order": 1.999859812656156e-10,
+      "order_checks": 9.522072619980919e-11,
+      "order_status": 1.0459140496216934e-10,
+      "pay_bill": 1.053500946341531e-10,
+      "payday": 8.016409909776665e-11,
+      "pin_change": 3.7525035588776143e-11,
+      "play_music": 0.9999999761479329,
+      "plug_type": 1.0907104683184158e-10,
+      "pto_balance": 3.510900542693345e-11,
+      "pto_request": 8.505793888330469e-11,
+      "pto_request_status": 4.921629159822863e-11,
+      "pto_used": 6.078537341826787e-11,
+      "recipe": 2.345874902440272e-10,
+      "redeem_rewards": 4.293895440488188e-11,
+      "reminder": 8.574247920325355e-11,
+      "reminder_update": 1.2774076696684877e-10,
+      "repeat": 4.1905197972519607e-10,
+      "replacement_card_duration": 3.4551794652281325e-11,
+      "report_fraud": 1.3346053606307818e-10,
+      "report_lost_card": 5.6970196413474464e-11,
+      "reset_settings": 1.0750947942321296e-10,
+      "restaurant_reservation": 5.912837656948344e-11,
+      "restaurant_reviews": 1.0879184313959657e-10,
+      "restaurant_suggestion": 1.7321943766093282e-10,
+      "rewards_balance": 3.711222630244553e-11,
+      "roll_dice": 1.165373316941896e-10,
+      "rollover_401k": 3.9000616123919134e-11,
+      "routing": 1.8635813501390138e-11,
+      "schedule_maintenance": 1.387876803015671e-10,
+      "schedule_meeting": 1.013851438786474e-10,
+      "share_location": 2.43404739100089e-10,
+      "shopping_list": 1.5825318848996526e-11,
+      "shopping_list_update": 1.335915077698987e-10,
+      "smart_home": 8.089033751641639e-10,
+      "spelling": 8.723388839794042e-11,
+      "spending_history": 1.079986200689036e-10,
+      "sync_device": 3.1552183834651594e-10,
+      "taxes": 5.275401195014263e-11,
+      "tell_joke": 1.3960822653380815e-10,
+      "text": 1.2070727286210756e-10,
+      "thank_you": 3.3188575802233395e-10,
+      "time": 2.7943485977821222e-11,
+      "timer": 1.496921505238859e-10,
+      "timezone": 8.028269056423391e-11,
+      "tire_change": 3.7861997526920424e-11,
+      "tire_pressure": 5.124905476421864e-11,
+      "todo_list": 4.1524052323644026e-11,
+      "todo_list_update": 1.6398466917044213e-10,
+      "traffic": 6.249578810362302e-11,
+      "transactions": 1.1205963816754437e-10,
+      "transfer": 2.1005596482163472e-10,
+      "translate": 1.1748509635193266e-10,
+      "travel_alert": 8.261220993359086e-11,
+      "travel_notification": 5.0088187198530803e-11,
+      "travel_suggestion": 9.961126439499655e-11,
+      "uber": 7.832191995772031e-11,
+      "update_playlist": 2.843010900405351e-10,
+      "user_name": 2.4756395453845303e-11,
+      "vaccines": 8.408933928790619e-11,
+      "w2": 8.226116331464565e-11,
+      "weather": 1.2980644309093402e-10,
+      "what_are_your_hobbies": 4.005530466804263e-11,
+      "what_can_i_ask_you": 3.9618854222037564e-11,
+      "what_is_your_name": 6.81260468300119e-11,
+      "what_song": 4.8972022284743805e-11,
+      "where_are_you_from": 7.798723440115999e-11,
+      "whisper_mode": 9.903658178113485e-10,
+      "who_do_you_work_for": 6.969438972564617e-11,
+      "who_made_you": 1.245553886858066e-10,
+      "yes": 2.98250119290663e-10
+    },
+    "confidence": 0.9999999761479329,
+    "abstain": false,
+    "reason": null,
+    "model": "tfidf_logistic_regression"
+  },
+  {
+    "task": "spam",
+    "label": "spam",
+    "candidate_label": "spam",
+    "probabilities": {
+      "ham": 0.0002530127316652023,
+      "spam": 0.9997469872683348
+    },
+    "confidence": 0.9997469872683348,
+    "abstain": false,
+    "reason": null,
+    "model": "tfidf_complement_nb"
+  }
+]
