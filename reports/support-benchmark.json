@@ -1,0 +1,44 @@
+{
+  "scope": "warmed batch-one CPU prediction: tokenization + encoder/heads + decode + validation",
+  "excludes": "process startup, artifact loading, HTTP transport, external service latency",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "torch": "2.15.0",
+  "cpu_threads": 4,
+  "repeats": 120,
+  "warmup": 12,
+  "case_count": 6,
+  "load_seconds": 0.6031034170009661,
+  "p50_ms": 5.3403545,
+  "p95_ms": 6.707210399999999,
+  "p99_ms": 7.074632,
+  "mean_ms": 5.5089410333333335,
+  "sequential_requests_per_second": 181.5230901818027,
+  "model_only_single_case_p50_ms": 4.78825,
+  "cases": [
+    {
+      "text": "My card was stolen last night. Please block it.",
+      "domain": "banking"
+    },
+    {
+      "text": "Why is my transfer still pending?",
+      "domain": "banking"
+    },
+    {
+      "text": "How much did I spend on Amazon this month?",
+      "domain": "banking"
+    },
+    {
+      "text": "Can I book two rooms for three adults next Friday?",
+      "domain": "hotels"
+    },
+    {
+      "text": "I cannot connect to the hotel wifi.",
+      "domain": "hotels"
+    },
+    {
+      "text": "What time does the swimming pool close?",
+      "domain": "hotels"
+    }
+  ]
+}
