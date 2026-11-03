@@ -1,7 +1,7 @@
-
 import hashlib
 import json
 
+import numpy as np
 import pytest
 from transformers import BertTokenizerFast
 
@@ -17,10 +17,16 @@ def tiny_tokenizer(tmp_path):
 
 def test_encoded_records_preserve_overlapping_gold_slots(tmp_path):
     from reflexone.data import Record, Slot, load_ontology
+
     ontology = load_ontology()
-    record = Record("fixture", "only today", "hotels", (),
-                    (Slot("date", 5, 10, "today"), Slot("date_period", 0, 10, "only today")),
-                    "only today")
+    record = Record(
+        "fixture",
+        "only today",
+        "hotels",
+        (),
+        (Slot("date", 5, 10, "today"), Slot("date_period", 0, 10, "only today")),
+        "only today",
+    )
     encoded = encode_records([record], tiny_tokenizer(tmp_path), ontology, max_length=8)
     targets = encoded.tensors["slot_targets"].numpy()
     date, period = ontology.slot_types.index("date"), ontology.slot_types.index("date_period")
@@ -33,16 +39,17 @@ def test_encoded_records_preserve_overlapping_gold_slots(tmp_path):
 
 def test_encode_refuses_silent_loss_of_a_truncated_gold_span(tmp_path):
     from reflexone.data import Record, Slot, load_ontology
-    record = Record("fixture", "card card card today", "hotels", (),
-                    (Slot("date", 15, 20, "today"),), "group")
+
+    record = Record(
+        "fixture", "card card card today", "hotels", (), (Slot("date", 15, 20, "today"),), "group"
+    )
     with pytest.raises(ValueError, match="truncat|cover"):
         encode_records([record], tiny_tokenizer(tmp_path), load_ontology(), max_length=4)
 
 
 def test_span_metrics_require_both_type_and_exact_character_offsets():
     gold = [[{"label": "date", "start": 0, "end": 5}]]
-    predicted = [[{"label": "date", "start": 0, "end": 4},
-                  {"label": "time", "start": 0, "end": 5}]]
+    predicted = [[{"label": "date", "start": 0, "end": 4}, {"label": "time", "start": 0, "end": 5}]]
     result = span_metrics(gold, predicted)
     assert result["f1"] == 0
     assert result["true_positive"] == 0
@@ -70,3 +77,14 @@ def test_prepared_verification_detects_modified_test_data_and_identity(tmp_path)
     (tmp_path / "test.jsonl").write_text('{"id":"different"}\n')
     with pytest.raises(ValueError, match="checksum|hash"):
         verify_prepared_data(tmp_path, fingerprint)
+
+
+def test_support_review_fit_excludes_requests_deployment_always_reviews():
+    from reflexone.training import fit_support_review
+
+    probabilities = np.array([[0.01, 0.01]] * 50 + [[0.98, 0.01]] * 20)
+    targets = np.array([[0, 0]] * 50 + [[1, 0]] * 20)
+    cutoff = fit_support_review(targets, probabilities, 0.66, np.ones((70, 2), dtype=bool))
+    # Empty predictions have larger raw margins, but deployment never auto-accepts them.
+    # The fit must retain the twenty confidently correct nonempty predictions.
+    assert 0 <= cutoff <= 0.32 + 1e-10

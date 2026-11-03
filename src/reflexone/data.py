@@ -30,17 +30,14 @@ PREPARATION_VERSION = 1
 
 ATTRIBUTION = {
     "dataset": "NLU++",
-    "authors": [
-        "Inigo Casanueva", "Ivan Vulić", "Georgios Spithourakis", "Paweł Budzianowski"
-    ],
+    "authors": ["Inigo Casanueva", "Ivan Vulić", "Georgios Spithourakis", "Paweł Budzianowski"],
     "paper": "https://aclanthology.org/2022.findings-naacl.154/",
     "repository": "https://github.com/PolyAI-LDN/task-specific-datasets",
     "source_revision": SOURCE_REVISION,
     "license": "CC-BY-4.0",
     "license_url": "https://creativecommons.org/licenses/by/4.0/",
     "source_license": (
-        "https://github.com/PolyAI-LDN/task-specific-datasets/"
-        f"blob/{SOURCE_REVISION}/LICENSE"
+        f"https://github.com/PolyAI-LDN/task-specific-datasets/blob/{SOURCE_REVISION}/LICENSE"
     ),
     "modifications": (
         "Original text and character spans retained; conflicting duplicate annotations "
@@ -138,25 +135,35 @@ def _validate_record(record: Record, ontology: Ontology) -> None:
     if not isinstance(record.id, str) or not record.id:
         raise ValueError("Record id must be a nonempty string")
     valid_intents = {
-        label for label, valid in zip(ontology.intents, ontology.intent_mask(record.domain)) if valid
+        label
+        for label, valid in zip(ontology.intents, ontology.intent_mask(record.domain))
+        if valid
     }
     valid_slots = {
-        label for label, valid in zip(ontology.slot_types, ontology.slot_mask(record.domain)) if valid
+        label
+        for label, valid in zip(ontology.slot_types, ontology.slot_mask(record.domain))
+        if valid
     }
     for label in record.intents:
         if label not in valid_intents:
-            raise ValueError(f"{context}: intent {label!r} is unknown or invalid for domain {record.domain}")
+            raise ValueError(
+                f"{context}: intent {label!r} is unknown or invalid for domain {record.domain}"
+            )
     for slot in record.slots:
         if slot.label not in valid_slots:
-            raise ValueError(f"{context}: slot {slot.label!r} is unknown or invalid for domain {record.domain}")
+            raise ValueError(
+                f"{context}: slot {slot.label!r} is unknown or invalid for domain {record.domain}"
+            )
         if (
             type(slot.start) is not int
             or type(slot.end) is not int
             or not 0 <= slot.start < slot.end <= len(record.text)
             or not isinstance(slot.text, str)
-            or record.text[slot.start:slot.end] != slot.text
+            or record.text[slot.start : slot.end] != slot.text
         ):
-            raise ValueError(f"{context}: invalid or inexact span for {slot.label!r}: {slot.start, slot.end}")
+            raise ValueError(
+                f"{context}: invalid or inexact span for {slot.label!r}: {slot.start, slot.end}"
+            )
 
 
 def load_records(path: Path) -> list[Record]:
@@ -175,9 +182,12 @@ def load_records(path: Path) -> list[Record]:
         try:
             value = json.loads(line)
             record = Record(
-                id=value["id"], text=value["text"], domain=value["domain"],
+                id=value["id"],
+                text=value["text"],
+                domain=value["domain"],
                 intents=tuple(value["intents"]),
-                slots=tuple(Slot(**s) for s in value["slots"]), group=value["group"],
+                slots=tuple(Slot(**s) for s in value["slots"]),
+                group=value["group"],
             )
             _validate_record(record, ontology)
         except (KeyError, TypeError, ValueError) as exc:
@@ -210,9 +220,9 @@ def _download_raw(raw_root: Path, relative_path: str) -> None:
     raise RuntimeError(f"Failed to download pinned source {url} after 3 attempts: {last_error}")
 
 
-def _source_records(raw_root: Path, ontology: Ontology, source_paths: list[str]) -> tuple[
-    list[Record], dict[str, Any]
-]:
+def _source_records(
+    raw_root: Path, ontology: Ontology, source_paths: list[str]
+) -> tuple[list[Record], dict[str, Any]]:
     records = []
     overlaps = []
     repeated_labels = 0
@@ -232,18 +242,28 @@ def _source_records(raw_root: Path, ontology: Ontology, source_paths: list[str])
                 text = value["text"]
                 raw_intents = value.get("intents", [])
                 raw_slots = value.get("slots", {})
-                if not isinstance(raw_intents, list) or any(not isinstance(x, str) for x in raw_intents):
+                if not isinstance(raw_intents, list) or any(
+                    not isinstance(x, str) for x in raw_intents
+                ):
                     raise ValueError("intents must be a list of label strings")
                 if not isinstance(raw_slots, dict):
                     raise ValueError("slots must be an object")
                 slots = []
                 for label, slot in raw_slots.items():
-                    if not isinstance(slot, dict) or not isinstance(slot.get("span"), list) or len(slot["span"]) != 2:
+                    if (
+                        not isinstance(slot, dict)
+                        or not isinstance(slot.get("span"), list)
+                        or len(slot["span"]) != 2
+                    ):
                         raise ValueError(f"malformed span for {label!r}")
                     slots.append(Slot(label, slot["span"][0], slot["span"][1], slot["text"]))
                 record = Record(
-                    source_id, text, domain, tuple(sorted(set(raw_intents))),
-                    tuple(sorted(slots, key=lambda s: (s.label, s.start, s.end))), _group_id(text),
+                    source_id,
+                    text,
+                    domain,
+                    tuple(sorted(set(raw_intents))),
+                    tuple(sorted(slots, key=lambda s: (s.label, s.start, s.end))),
+                    _group_id(text),
                 )
                 _validate_record(record, ontology)
             except (KeyError, TypeError, ValueError, AttributeError) as exc:
@@ -271,7 +291,9 @@ def _source_records(raw_root: Path, ontology: Ontology, source_paths: list[str])
     }
 
 
-def _canonicalize(records: list[Record]) -> tuple[list[Record], dict[str, list[str]], dict[str, Any]]:
+def _canonicalize(
+    records: list[Record],
+) -> tuple[list[Record], dict[str, list[str]], dict[str, Any]]:
     grouped: dict[str, list[Record]] = defaultdict(list)
     for record in records:
         grouped[record.group].append(record)
@@ -287,11 +309,15 @@ def _canonicalize(records: list[Record]) -> tuple[list[Record], dict[str, list[s
         if conflicting_intents or conflicting_slots:
             intent_conflicts += conflicting_intents
             slot_conflicts += conflicting_slots
-            quarantine.append({
-                "group": group_id, "normalized_text": _normalize_text(group[0].text),
-                "intent_conflict": conflicting_intents, "slot_conflict": conflicting_slots,
-                "records": [asdict(r) for r in group],
-            })
+            quarantine.append(
+                {
+                    "group": group_id,
+                    "normalized_text": _normalize_text(group[0].text),
+                    "intent_conflict": conflicting_intents,
+                    "slot_conflict": conflicting_slots,
+                    "records": [asdict(r) for r in group],
+                }
+            )
             continue
         # Source records were read by domain, then numeric fold index, then row.
         for domain in DOMAINS:
@@ -301,21 +327,27 @@ def _canonicalize(records: list[Record]) -> tuple[list[Record], dict[str, list[s
                 canonical.append(selected)
                 provenance[selected.id] = [r.id for r in domain_records]
     canonical.sort(key=lambda r: (r.domain, r.group, r.id))
-    return canonical, provenance, {
-        "duplicate_groups": len(duplicate_groups),
-        "duplicate_records": sum(len(g) for g in duplicate_groups),
-        "duplicate_excess": sum(len(g) - 1 for g in duplicate_groups),
-        "cross_domain_duplicate_groups": sum(len({r.domain for r in g}) > 1 for g in duplicate_groups),
-        "conflicting_groups": len(quarantine),
-        "conflicting_intent_groups": intent_conflicts,
-        "conflicting_slot_groups": slot_conflicts,
-        "quarantined_records": sum(len(g["records"]) for g in quarantine),
-        "quarantine": quarantine,
-        "canonical_records": len(canonical),
-        "canonical_by_domain": dict(Counter(r.domain for r in canonical)),
-        "canonical_slot_annotations": sum(len(r.slots) for r in canonical),
-        "global_groups": len({r.group for r in canonical}),
-    }
+    return (
+        canonical,
+        provenance,
+        {
+            "duplicate_groups": len(duplicate_groups),
+            "duplicate_records": sum(len(g) for g in duplicate_groups),
+            "duplicate_excess": sum(len(g) - 1 for g in duplicate_groups),
+            "cross_domain_duplicate_groups": sum(
+                len({r.domain for r in g}) > 1 for g in duplicate_groups
+            ),
+            "conflicting_groups": len(quarantine),
+            "conflicting_intent_groups": intent_conflicts,
+            "conflicting_slot_groups": slot_conflicts,
+            "quarantined_records": sum(len(g["records"]) for g in quarantine),
+            "quarantine": quarantine,
+            "canonical_records": len(canonical),
+            "canonical_by_domain": dict(Counter(r.domain for r in canonical)),
+            "canonical_slot_annotations": sum(len(r.slots) for r in canonical),
+            "global_groups": len({r.group for r in canonical}),
+        },
+    )
 
 
 def _assign_splits(records: list[Record], seed: int) -> dict[str, str]:
@@ -333,11 +365,11 @@ def _assign_splits(records: list[Record], seed: int) -> dict[str, str]:
         ideals = [len(groups) * p for p in SPLIT_PROPORTIONS]
         sizes = [math.floor(x) for x in ideals]
         remainders = sorted(range(4), key=lambda i: (-(ideals[i] - sizes[i]), i))
-        for index in remainders[:len(groups) - sum(sizes)]:
+        for index in remainders[: len(groups) - sum(sizes)]:
             sizes[index] += 1
         offset = 0
         for split, size in zip(SPLITS, sizes):
-            for group in groups[offset:offset + size]:
+            for group in groups[offset : offset + size]:
                 assignment[group] = split
             offset += size
     return assignment
@@ -347,7 +379,8 @@ def _supports(records: list[Record], ontology: Ontology) -> dict[str, Any]:
     intents = Counter(label for r in records for label in r.intents)
     slots = Counter(slot.label for r in records for slot in r.slots)
     return {
-        "records": len(records), "groups": len({r.group for r in records}),
+        "records": len(records),
+        "groups": len({r.group for r in records}),
         "domains": {d: sum(r.domain == d for r in records) for d in DOMAINS},
         "empty_intents": sum(not r.intents for r in records),
         "empty_slots": sum(not r.slots for r in records),
@@ -377,8 +410,12 @@ def prepare_dataset(path: Path, seed: int = 17) -> dict[str, Any]:
     manifest_path = path / "manifest.json"
     previous = _read_json(manifest_path) if manifest_path.is_file() else None
     if previous and previous.get("split_seed") != seed:
-        raise ValueError("Dataset split is frozen; use its recorded seed or prepare another directory")
-    source_paths = ["ontology.json"] + [f"{d}/fold{fold}.json" for d in DOMAINS for fold in range(20)]
+        raise ValueError(
+            "Dataset split is frozen; use its recorded seed or prepare another directory"
+        )
+    source_paths = ["ontology.json"] + [
+        f"{d}/fold{fold}.json" for d in DOMAINS for fold in range(20)
+    ]
     raw_root = path / "raw"
     raw_root.mkdir(exist_ok=True)
     with ThreadPoolExecutor(max_workers=8) as pool:
@@ -386,12 +423,18 @@ def prepare_dataset(path: Path, seed: int = 17) -> dict[str, Any]:
     source_files = []
     for name in source_paths:
         content = (raw_root / name).read_bytes()
-        source_files.append({
-            "path": f"raw/{name}", "url": SOURCE_BASE + name,
-            "sha256": hashlib.sha256(content).hexdigest(), "bytes": len(content),
-        })
+        source_files.append(
+            {
+                "path": f"raw/{name}",
+                "url": SOURCE_BASE + name,
+                "sha256": hashlib.sha256(content).hexdigest(),
+                "bytes": len(content),
+            }
+        )
     if previous and previous.get("source_files") != source_files:
-        raise ValueError("Dataset source bytes are frozen by the existing manifest; use another directory")
+        raise ValueError(
+            "Dataset source bytes are frozen by the existing manifest; use another directory"
+        )
     ontology = load_ontology(raw_root / "ontology.json")
     raw_records, raw_audit = _source_records(raw_root, ontology, source_paths)
     records, provenance, dedup_audit = _canonicalize(raw_records)
@@ -405,21 +448,38 @@ def prepare_dataset(path: Path, seed: int = 17) -> dict[str, Any]:
             (json.dumps(asdict(r), ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8")
             for r in partitions[name]
         )
-    records_manifest = [{
-        "id": r.id, "group": r.group, "domain": r.domain, "split": assignment[r.group],
-        "source_ids": provenance[r.id],
-    } for r in records]
-    fingerprint = hashlib.sha256(_json_bytes({
-        "preparation_version": PREPARATION_VERSION, "source_revision": SOURCE_REVISION,
-        "source_files": source_files, "split_seed": seed,
-        "output_sha256": {k: hashlib.sha256(v).hexdigest() for k, v in prepared_files.items()},
-        "records": records_manifest,
-    })).hexdigest()
+    records_manifest = [
+        {
+            "id": r.id,
+            "group": r.group,
+            "domain": r.domain,
+            "split": assignment[r.group],
+            "source_ids": provenance[r.id],
+        }
+        for r in records
+    ]
+    fingerprint = hashlib.sha256(
+        _json_bytes(
+            {
+                "preparation_version": PREPARATION_VERSION,
+                "source_revision": SOURCE_REVISION,
+                "source_files": source_files,
+                "split_seed": seed,
+                "output_sha256": {
+                    k: hashlib.sha256(v).hexdigest() for k, v in prepared_files.items()
+                },
+                "records": records_manifest,
+            }
+        )
+    ).hexdigest()
     audit = {
-        "dataset": "NLU++", "source_revision": SOURCE_REVISION,
-        "preparation_version": PREPARATION_VERSION, "split_seed": seed,
+        "dataset": "NLU++",
+        "source_revision": SOURCE_REVISION,
+        "preparation_version": PREPARATION_VERSION,
+        "split_seed": seed,
         "fingerprint": fingerprint,
-        **raw_audit, **dedup_audit,
+        **raw_audit,
+        **dedup_audit,
         "supports": {name: _supports(partitions[name], ontology) for name in SPLITS},
         "label_order": {"intents": list(ontology.intents), "slots": list(ontology.slot_types)},
         "protocol": (
@@ -429,13 +489,19 @@ def prepare_dataset(path: Path, seed: int = 17) -> dict[str, Any]:
     }
     prepared_files["audit.json"] = _json_bytes(audit)
     manifest = {
-        "dataset": "NLU++", "attribution": ATTRIBUTION,
+        "dataset": "NLU++",
+        "attribution": ATTRIBUTION,
         "preparation_version": PREPARATION_VERSION,
-        "source_revision": SOURCE_REVISION, "source_files": source_files,
-        "split_seed": seed, "split_proportions": dict(zip(SPLITS, SPLIT_PROPORTIONS)),
+        "source_revision": SOURCE_REVISION,
+        "source_files": source_files,
+        "split_seed": seed,
+        "split_proportions": dict(zip(SPLITS, SPLIT_PROPORTIONS)),
         "group_normalization": "NFKC, casefold, collapse whitespace; original text unchanged",
-        "fingerprint": fingerprint, "records": records_manifest,
-        "output_sha256": {name: hashlib.sha256(content).hexdigest() for name, content in prepared_files.items()},
+        "fingerprint": fingerprint,
+        "records": records_manifest,
+        "output_sha256": {
+            name: hashlib.sha256(content).hexdigest() for name, content in prepared_files.items()
+        },
     }
     for name, content in prepared_files.items():
         _atomic_write(path / name, content)

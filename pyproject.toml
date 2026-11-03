@@ -23,7 +23,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<10", "httpx>=0.27,<1", "ruff>=0.8,<1"]
+dev = [
+    "pytest>=8,<10",
+    "httpx>=0.27,<1",
+    "ruff>=0.8,<1",
+    "httpx2>=2.16.0",
+]
 
 [project.scripts]
 reflexone = "reflexone.cli:main"
