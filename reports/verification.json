@@ -1,0 +1,57 @@
+{
+  "verified_at_utc": "2026-11-03T22:11:26.978997+00:00",
+  "release": "https://github.com/PDGamerSG/reflexone/releases/tag/v0.1.0",
+  "release_source_commit": "9f41445de3c0b70d29ff7217cb75d97980d5d09a",
+  "repository_visibility": "private",
+  "local": {
+    "pytest_passed": 66,
+    "warnings_as_errors": true,
+    "ruff_check": "pass",
+    "ruff_format": "pass",
+    "wheel_build": "pass",
+    "isolated_wheel_install": "pass",
+    "packaged_ontology_intents": 62,
+    "packaged_ontology_slot_types": 17,
+    "documentation_links_checked": 55,
+    "release_archive_files_hash_verified": 28,
+    "fresh_archive_api_profiles_loaded": 3,
+    "fresh_archive_mixed_predictions": 4
+  },
+  "github_ci": {
+    "status": "success",
+    "url": "https://github.com/PDGamerSG/reflexone/actions/runs/41728199975",
+    "runner": "ubuntu-latest",
+    "checks": [
+      "uv sync --frozen --extra dev --python 3.12",
+      "uv run ruff check src tests",
+      "uv run ruff format --check src tests",
+      "uv run pytest -q -W error",
+      "uv build"
+    ]
+  },
+  "model_archive": {
+    "bytes": 121863179,
+    "sha256": "c656098809b926b6ca789294d4023e4ee087887e5ca9ea8880ee8b97f1246381",
+    "remote_release_digest_matches": true
+  },
+  "trained_profiles": [
+    "support",
+    "commands",
+    "spam"
+  ],
+  "neural_seeds": [
+    42,
+    7,
+    123
+  ],
+  "independent_review_fixes": [
+    "dataset manifest/checksum identity",
+    "unrepresentable gold span boundaries",
+    "tied-score coverage groups",
+    "classical artifact checksums and identity",
+    "deployed support review evaluation equivalence",
+    "wrong-profile API artifact guard",
+    "calibration threshold consistency",
+    "support weight checksums"
+  ]
+}
