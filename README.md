@@ -15,7 +15,7 @@ Four use cases share the same serving interface:
 
 ## Try the trained models
 
-Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The repository and release are private until the owner chooses to make them public; `gh` must be signed into an account with access.
+Requires Python 3.12 and [uv](https://docs.astral.sh/uv/). The repository and release are public, so the release assets can be downloaded from GitHub without authentication.
 
 ```bash
 git clone https://github.com/PDGamerSG/reflexone.git
