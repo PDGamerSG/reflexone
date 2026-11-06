@@ -21,6 +21,8 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="reflexone", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("profiles", help="Describe model families and supported use cases")
+    download = sub.add_parser("download-models", help="Download and verify released model profiles")
+    download.add_argument("--artifacts-root", type=Path, default=Path("artifacts"))
     prepare = sub.add_parser("prepare", help="Download and audit support data")
     prepare.add_argument("--data", type=Path, default=Path("data/support"))
     prepare.add_argument("--seed", type=int, default=17)
@@ -85,6 +87,10 @@ def main(argv: list[str] | None = None) -> int:
                     "algorithm": "TF-IDF Complement Naive Bayes + temperature",
                 },
             }
+        elif args.command == "download-models":
+            from reflexone.artifacts import download_models
+
+            result = download_models(args.artifacts_root)
         elif args.command == "prepare":
             from reflexone.data import prepare_dataset
 
