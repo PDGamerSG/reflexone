@@ -56,4 +56,6 @@ Training uses only the train partition. Validation chooses checkpoints and raw i
 
 `reflexone serve` loads available profiles once. The support predictor serializes neural access with a lock; classical inference reads frozen scikit-learn pipelines. Startup rejects a classical artifact in the wrong profile directory. Requests validate profile, known support domain, nonblank text and size before prediction. A batch contains at most 32 requests and is checked for missing models before any prediction. Truncated support inputs always require review.
 
+The root redirects to interactive API documentation. `/health` reports process status and whichever profiles are loaded; `/ready` requires all three released profiles and returns 503 for an incomplete deployment. The CPU container installs the pinned release during build, sets offline loading flags, and loads weights and tokenizers locally. See [deployment](deployment.md) for the source allowlist, hosting and HTTP verification.
+
 No endpoint sends messages, moves money or changes bookings. Intent modules often describe topics rather than assertions: a sentence saying “not lost” can carry both `deny` and `lost_stolen`. A downstream workflow needs separate policy and authorization logic.

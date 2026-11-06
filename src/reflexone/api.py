@@ -6,9 +6,11 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Annotated
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel, Field
 
+from reflexone import __version__
 from reflexone.inference import SupportPredictor
 from reflexone.schema import CategoricalDecision, PredictRequest, SupportDecision
 from reflexone.tasks import TaskPredictor
@@ -39,14 +41,29 @@ def create_app(artifacts_root: Path | str = "artifacts") -> FastAPI:
 
     app = FastAPI(
         title="ReflexOne",
-        version="0.1.0",
+        version=__version__,
         lifespan=lifespan,
         description="Locally trained typed decisions. Output validity does not guarantee correctness.",
     )
 
+    @app.get("/", include_in_schema=False)
+    def index():
+        return RedirectResponse("/docs")
+
     @app.get("/health")
     def health() -> dict:
         return {"status": "ok", "ready": bool(predictors), "loaded_profiles": sorted(predictors)}
+
+    @app.get("/ready")
+    def readiness(response: Response) -> dict:
+        missing = sorted({"support", "commands", "spam"} - predictors.keys())
+        if missing:
+            response.status_code = 503
+        return {
+            "ready": not missing,
+            "loaded_profiles": sorted(predictors),
+            "missing_profiles": missing,
+        }
 
     @app.get("/profiles")
     def profiles() -> dict:

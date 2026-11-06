@@ -6,6 +6,24 @@ from fastapi.testclient import TestClient
 from reflexone.api import create_app
 
 
+def test_api_root_opens_interactive_documentation(tmp_path):
+    with TestClient(create_app(tmp_path)) as client:
+        response = client.get("/", follow_redirects=False)
+        assert response.status_code == 307
+        assert response.headers["location"] == "/docs"
+
+
+def test_api_readiness_fails_when_released_profiles_are_missing(tmp_path):
+    with TestClient(create_app(tmp_path)) as client:
+        response = client.get("/ready")
+        assert response.status_code == 503
+        assert response.json() == {
+            "ready": False,
+            "loaded_profiles": [],
+            "missing_profiles": ["commands", "spam", "support"],
+        }
+
+
 def test_api_lists_only_loaded_profiles_and_rejects_bad_requests(tmp_path):
     with TestClient(create_app(tmp_path)) as client:
         assert client.get("/health").json()["ready"] is False
@@ -47,6 +65,9 @@ def test_real_classical_profile_api_contract(tmp_path):
     tasks.train_task("spam", data_dir, tmp_path / "artifacts" / "spam")
     with TestClient(create_app(tmp_path / "artifacts")) as client:
         assert client.get("/health").json()["ready"] is True
+        readiness = client.get("/ready")
+        assert readiness.status_code == 503
+        assert readiness.json()["missing_profiles"] == ["commands", "support"]
         result = client.post("/predict", json={"profile": "spam", "text": "win cash prize now"})
         assert result.status_code == 200
         assert result.json()["label"] == "spam"

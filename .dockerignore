@@ -1,0 +1,17 @@
+*
+!Dockerfile
+!pyproject.toml
+!uv.lock
+!README.md
+!LICENSE
+!THIRD_PARTY.md
+!licenses/
+!licenses/**
+!src/
+!src/**
+**/__pycache__/
+**/*.pyc
+**/.env
+**/.env.*
+**/*.key
+**/*.pem

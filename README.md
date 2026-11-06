@@ -22,10 +22,8 @@ git clone https://github.com/PDGamerSG/reflexone.git
 cd reflexone
 uv sync --frozen --extra dev
 
-# Download the actual trained checkpoints.
-gh release download v0.1.0 --repo PDGamerSG/reflexone --pattern 'reflexone-models-v0.1.0.tar.gz' --pattern 'SHA256SUMS' --dir dist
-(cd dist && shasum -a 256 -c SHA256SUMS)
-tar -xzf dist/reflexone-models-v0.1.0.tar.gz
+# Download and verify the actual trained checkpoints without authentication.
+uv run reflexone download-models
 
 uv run reflexone predict --domain banking --text 'My card was stolen last night. Please block it.' --selected-only
 uv run reflexone predict --domain hotels --text 'Can I book two rooms for three adults next Friday?' --selected-only
@@ -98,7 +96,9 @@ curl http://127.0.0.1:8000/predict \
   -d '{"profile":"support","domain":"banking","text":"Why is my transfer pending?"}'
 ```
 
-`GET /health`, `GET /profiles`, `POST /predict`, `POST /predict/batch` and generated `/docs` are available. A batch accepts up to 32 mixed requests; API text is limited to 4,000 characters. Support requires the known `banking` or `hotels` domain. Truncated input requires review. Models load once; misplaced classical profile artifacts are rejected at startup.
+`GET /health`, `GET /ready`, `GET /profiles`, `POST /predict`, `POST /predict/batch` and generated `/docs` are available. The root opens the interactive API documentation. Readiness returns 503 unless all three profiles are loaded. A batch accepts up to 32 mixed requests; API text is limited to 4,000 characters. Support requires the known `banking` or `hotels` domain. Truncated input requires review. Models load once; misplaced classical profile artifacts are rejected at startup.
+
+For a CPU container or a public Hugging Face Docker Space, follow the [deployment guide](docs/deployment.md). The image includes checksum-verified models, runs as a non-root user, and supports all four use cases through the same API. Verify a running instance with `uv run python scripts/check_api.py http://127.0.0.1:7860`.
 
 ## Read and explain it
 

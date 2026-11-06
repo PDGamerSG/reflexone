@@ -11,7 +11,25 @@ jobs:
         with:
           version: '0.12.13'
       - run: uv sync --frozen --extra dev --python 3.12
-      - run: uv run ruff check src tests
-      - run: uv run ruff format --check src tests
+      - run: uv run ruff check src tests scripts
+      - run: uv run ruff format --check src tests scripts
       - run: uv run pytest -q -W error
       - run: uv build
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: reflexone:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - run: docker run -d --name reflexone -p 127.0.0.1:7860:7860 --read-only --tmpfs /tmp:rw,size=128m reflexone:ci
+      - run: python3 scripts/check_api.py http://127.0.0.1:7860 --wait-seconds 180
+      - if: always()
+        run: docker logs reflexone || true
+      - if: always()
+        run: docker rm -f reflexone || true
